@@ -4,8 +4,8 @@ import unittest
 import mock
 import pytest
 
-from logger import DDLogger
-from logger import get_logger
+from ddtrace.internal.logger import DDLogger
+from ddtrace.internal.logger import get_logger
 
 
 ALL_LEVEL_NAMES = ("debug", "info", "warning", "error", "exception", "critical", "fatal")
@@ -38,7 +38,7 @@ class DDLoggerTestCase(unittest.TestCase):
     ):
         return logger.makeRecord(logger.name, level, fn, lno, msg, args, exc_info, func, extra)
 
-    @mock.patch("logger.DDLogger.handle")
+    @mock.patch("ddtrace.internal.logger.DDLogger.handle")
     def assert_log_records(self, log, expected_levels, handle):
         for name in ALL_LEVEL_NAMES:
             method = getattr(log, name)
